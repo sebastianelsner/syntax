@@ -33,6 +33,20 @@ $math.reset("vst")
   #end
 #end
 
+#macro(line13b $nr $text $steuer)
+  #if(${positions.get($nr)})
+    #set($pos = ${positions.get($nr)})
+    <tr class="content">
+      <td>$text</td>
+      $math.add("ust",$pos.steuerExakt)
+      <td style="text-align:center">$nr</td>
+      <td style="text-align:right">$!{decimalformat.format($pos.bemessung)}&nbsp;${eur}</td>
+      <td style="text-align:center">$steuer</td>
+      <td style="text-align:right">$!{decimalformat.format($pos.steuerExakt)}&nbsp;${eur}</td>
+    </tr>
+  #end
+#end
+
 <h2>Zeitraum: $!{dateformat.format(${start})} - $!{dateformat.format(${end})}</h2>
 
 <table class="data">
@@ -85,9 +99,9 @@ $math.reset("vst")
   <tr>
     <td colspan="5"><h3>Leistungsempf&auml;nger als Steuerschuldner (§13b UStG)</h3></td>
   </tr>
-  #line("46","Sonstige Leistungen nach §3a Absatz 2 UStG eines im &uuml;brigen Gemeinschaftsgebiet ans&auml;ssigen Unternehmers (§13b Absatz 1 UStG)",true,"47")
-  #line("73","Ums&auml;tze, die unter das GrEStG fallen (§13b Absatz 2 Nummer 3 UStG)",true,"74")
-  #line("84","Andere Leistungen (§13b Absatz 2 Nummer 1, 2, 4 bis 12 UStG)",true,"85")
+  #line13b("46","Sonstige Leistungen nach §3a Absatz 2 UStG eines im &uuml;brigen Gemeinschaftsgebiet ans&auml;ssigen Unternehmers (§13b Absatz 1 UStG)","47")
+  #line13b("73","Ums&auml;tze, die unter das GrEStG fallen (§13b Absatz 2 Nummer 3 UStG)","74")
+  #line13b("84","Andere Leistungen (§13b Absatz 2 Nummer 1, 2, 4 bis 12 UStG)","85")
 
   <tr>
     <td colspan="5"><h3>Erg&auml;nzende Angaben zu Ums&auml;tzen</h3></td>

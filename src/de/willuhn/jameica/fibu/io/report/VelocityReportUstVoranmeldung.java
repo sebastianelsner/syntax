@@ -118,6 +118,7 @@ public class VelocityReportUstVoranmeldung extends AbstractVelocityReport
     private double bemessung = 0.0d;
     private double steuer    = 0.0d;
     private double satz      = -1d;
+    private double steuerExakt = 0.0d;
     
     /**
      * Fuegt die Zahlen eines Kontos hinzu.
@@ -190,6 +191,11 @@ public class VelocityReportUstVoranmeldung extends AbstractVelocityReport
       if (soll) this.bemessung += betrag;
       else      this.bemessung -= betrag;
       
+      // Steuer je Buchung aus dem Netto-Betrag und dem Steuersatz der Buchung
+      double st = math.round(betrag * b.getSteuer() / 100d);
+      if (soll) this.steuerExakt += st;
+      else      this.steuerExakt -= st;
+
       DBIterator hilfsbuchungen = b.getHilfsBuchungen();
       while (hilfsbuchungen.hasNext())
       {
@@ -238,6 +244,22 @@ public class VelocityReportUstVoranmeldung extends AbstractVelocityReport
       
       // Wir runden auf 2 Stellen hinterm Komma
       return math.round(this.steuer);
+    }
+
+    /**
+     * Liefert die Summe der Steuer, die je Buchung aus dem Netto-Betrag
+     * und dem Steuersatz der Buchung berechnet wurde - ohne Kuerzung der
+     * Bemessungsgrundlage auf ganze Euro.
+     * Wird fuer die Steuer nach §13b UStG (Kz 47, 74, 85) verwendet. Die
+     * berechnet der Leistungsempfaenger laut Ausfuellanleitung selbst und
+     * zieht denselben Betrag als Vorsteuer (Kz 67) ab. Aus der auf ganze
+     * Euro gekuerzten Bemessungsgrundlage gerechnet, wuerde sie um einige
+     * Cent von der Vorsteuer abweichen.
+     * @return die Steuer.
+     */
+    public double getSteuerExakt()
+    {
+      return java.lang.Math.abs(math.round(this.steuerExakt));
     }
 
   }
