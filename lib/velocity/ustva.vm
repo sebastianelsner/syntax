@@ -83,6 +83,13 @@ $math.reset("vst")
   #line("95","zu anderen Steuers&auml;tzen",true,"98")
 
   <tr>
+    <td colspan="5"><h3>Leistungsempf&auml;nger als Steuerschuldner (§13b UStG)</h3></td>
+  </tr>
+  #line("46","Sonstige Leistungen nach §3a Absatz 2 UStG eines im &uuml;brigen Gemeinschaftsgebiet ans&auml;ssigen Unternehmers (§13b Absatz 1 UStG)",true,"47")
+  #line("73","Ums&auml;tze, die unter das GrEStG fallen (§13b Absatz 2 Nummer 3 UStG)",true,"74")
+  #line("84","Andere Leistungen (§13b Absatz 2 Nummer 1, 2, 4 bis 12 UStG)",true,"85")
+
+  <tr>
     <td colspan="5"><h3>Erg&auml;nzende Angaben zu Ums&auml;tzen</h3></td>
   </tr>
   #line("60","Ums&auml;tze nach §13b Absatz 5 UStG",true,false)
